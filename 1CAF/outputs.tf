@@ -1,3 +1,4 @@
-output "hello" {
-  value=local.hello
+
+output "moduleoutput" {
+   value = module.myModuleName
 }
