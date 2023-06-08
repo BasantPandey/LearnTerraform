@@ -29,7 +29,7 @@ env:
 
 jobs:
   foundations100:
-    name: foundations-100
+    name: Terraform-Initialize
     runs-on: ubuntu-latest
 
     strategy:
