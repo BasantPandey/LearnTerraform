@@ -58,9 +58,9 @@ jobs:
           
       - name: Init
         run: |
-          t
+          terraform
           
       - name: plan
         run: |
           cd ${GITHUB_WORKSPACE}/caf/1caf
-          t init
+          terraform init
