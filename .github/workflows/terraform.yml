@@ -57,6 +57,4 @@ jobs:
           git config --global --add safe.directory ${GITHUB_WORKSPACE}
           echo "local user: ${GITHUB_WORKSPACE}"
           ls -a
-          cd /1CAF
-          terraform init
-          terraform plan
+          Test.sh
