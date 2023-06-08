@@ -55,3 +55,11 @@ jobs:
       - name: Github Actions permissions workaround
         run: |
           git config --global --add safe.directory ${GITHUB_WORKSPACE}
+          
+      - name: Init
+        run: |
+          t Init
+          
+      - name: plan
+        run: |
+          t plan
