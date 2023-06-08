@@ -58,8 +58,8 @@ jobs:
           
       - name: Init
         run: |
-          t Init
+          /tf/caf/1caf/t Init
           
       - name: plan
         run: |
-          t plan
+          /tf/caf/1caf/t plan
