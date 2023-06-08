@@ -58,8 +58,9 @@ jobs:
           
       - name: Init
         run: |
-          ${GITHUB_WORKSPACE}/caf/1caf/t Init
+          t
           
       - name: plan
         run: |
-          ${GITHUB_WORKSPACE}//caf/1caf/t plan
+          cd ${GITHUB_WORKSPACE}/caf/1caf
+          t init
