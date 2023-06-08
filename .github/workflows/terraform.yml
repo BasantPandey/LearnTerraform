@@ -59,10 +59,10 @@ jobs:
           ls -a
       - name: Init
         run: |
-          cd ${GITHUB_WORKSPACE}/1caf
+          cd /1caf
           terraform init
           
       - name: plan
         run: |
-          cd ${GITHUB_WORKSPACE}/1caf
+          cd /1caf
           terraform plan
