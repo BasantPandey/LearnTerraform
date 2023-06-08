@@ -57,4 +57,4 @@ jobs:
           git config --global --add safe.directory ${GITHUB_WORKSPACE}
           echo "local user: ${GITHUB_WORKSPACE}"
           ls -a
-          Test.sh
+          ${GITHUB_WORKSPACE}/Test.sh
