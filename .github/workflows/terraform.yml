@@ -3,7 +3,7 @@
 # Licensed under the MIT License.
 #
 
-name: landingzones-tf100
+name: TerraFormDeployToAzure
 
 on:
   workflow_dispatch:
