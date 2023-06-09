@@ -44,18 +44,30 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set -s  ${{ env.ARM_SUBSCRIPTION_ID }}
-
           echo "local user: $(whoami)"
 
       - name: Github Actions permissions workaround
         run: |
           git config --global --add safe.directory ${GITHUB_WORKSPACE}
-          echo "local user: ${GITHUB_WORKSPACE}"
-          ls -a
-          cd ${GITHUB_WORKSPACE}/1CAF
-          terraform init
+          
+      - name: Terraform Init
+        run: |
+            echo "Local Directory Path: ${GITHUB_WORKSPACE}"
+            cd ${GITHUB_WORKSPACE}/1CAF
+            terraform init
+            
+      - name: Terraform Plan
+        run: |
+            echo "Local Directory Path: ${GITHUB_WORKSPACE}"
+            cd ${GITHUB_WORKSPACE}/1CAF
+            terraform Plan
+            
+      - name: Terraform Apply
+        run: | 
+            cd ${GITHUB_WORKSPACE}/1CAF
+            terraform Apply -auto-approve
