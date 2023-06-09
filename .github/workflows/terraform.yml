@@ -59,6 +59,14 @@ jobs:
         run: |
             echo "Local Directory Path: ${GITHUB_WORKSPACE}"
             cd ${GITHUB_WORKSPACE}/1CAF
-            terraform init
+            terraform init 
+            
+      - name: Terraform plan
+        run: | 
+            cd ${GITHUB_WORKSPACE}/1CAF 
             terraform plan -out tfplan
+            
+      - name: Terraform apply
+        run: | 
+            cd ${GITHUB_WORKSPACE}/1CAF
             terraform apply "tfplan"
