@@ -61,4 +61,4 @@ jobs:
             cd ${GITHUB_WORKSPACE}/1CAF
             terraform init
             terraform plan -out tfplan
-            terraform apply -out tfplan
+            terraform apply "tfplan"
