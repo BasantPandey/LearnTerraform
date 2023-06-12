@@ -4,13 +4,20 @@ on:
   issues:
     types: [opened]
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  COMMENTS_URL: ${{ github.event.issue.comments_url }}
+
 jobs:
    Comment-with-action:
     runs-on: ubuntu-latest
 
     steps:
       - name: "Dump github context"
-        run: echo '${{ toJSON(github.event) }}' | jq
+        run: |
+          echo 'Bearer ${GITHUB_TOKEN}'
+          echo 'COMMENTS_URL ${COMMENTS_URL}'
+          echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
       # - name: Create comment
@@ -31,7 +38,4 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             ${COMMENTS_URL} \
             -d '{"body":"Me too"}'
-
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMENTS_URL: ${{ github.event.issue.comments_url }}
+ 
