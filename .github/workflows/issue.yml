@@ -7,7 +7,9 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   COMMENTS_URL: ${{ github.event.issue.comments_url }}
-  NUMBER: ${{ github.event.issue.number }}
+  ISSUE_NUMBER: ${{ github.event.issue.number }}
+  OWNER: ${{ github.event.issue.user.login }}
+  REPO: ${{ github.event.repository.name }}
 
 jobs:
    Comment-with-action:
@@ -15,21 +17,9 @@ jobs:
 
     steps:
       - name: "Dump github context"
-        run: |
-          echo ${GITHUB_TOKEN}
-          echo ${COMMENTS_URL}
-           echo ${NUMBER}
+        run: | 
           echo '${{ toJSON(github.event) }}' | jq
-        shell: bash
-
-      # - name: Create comment
-      #   uses: peter-evans/create-or-update-comment@v1
-      #   with:
-      #     issue-number: ${{ github.event.issue.number }}
-      #     body: |
-      #       This is a multi-line test comment
-      #       - With GitHub **Markdown** :sparkles:
-      #     reactions: '+1'
+        shell: bash 
 
       # - name: Create comment with API
       #   run: |
@@ -38,9 +28,10 @@ jobs:
       #       -H "Accept: application/vnd.github+json" \
       #       -H "Authorization: Bearer ${GITHUB_TOKEN}"\
       #       -H "X-GitHub-Api-Version: 2022-11-28" \
-      #       ${COMMENTS_URL} \
+      #       https://api.github.com/repos/{OWNER}/{REPO}/issues/{ISSUE_NUMBER}/comments \
       #       -d '{"body":"Me too"}'
-
+      # /repos/OWNER/REPO/issues/ISSUE_NUMBER/comments \
+      # https://api.github.com/repos/BasantPandey/LearnTerraform/issues/14/comments
       - name: Create comment with API
         run: |
           gh api \
@@ -48,5 +39,5 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           -H "Authorization: Bearer ${GITHUB_TOKEN}"\
-          "${COMMENTS_URL}" \
+          https://api.github.com/repos/${OWNER}/${REPO}/issues/${ISSUE_NUMBER}/comments \
           -f body='Me too'
