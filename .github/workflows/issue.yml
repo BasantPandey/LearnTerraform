@@ -16,7 +16,7 @@ jobs:
       - name: "Dump github context"
         run: |
           echo 'Bearer ${GITHUB_TOKEN}'
-          echo 'COMMENTS_URL ${COMMENTS_URL}'
+          echo 'COMMENTS_URL ${{ COMMENTS_URL }}'
           echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
