@@ -67,7 +67,7 @@ jobs:
         id: plan
         run: | 
             cd ${GITHUB_WORKSPACE}/1CAF 
-            erraform plan -no-color
+            terraform plan -no-color
 
       - name: Update Pull Request
         uses: actions/github-script@v5
