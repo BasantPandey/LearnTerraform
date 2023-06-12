@@ -46,13 +46,14 @@ jobs:
 
       #       [1]: https://github.com/peter-evans/create-or-update-comment
       #     reactions: '+1'
-
+      #/repos/OWNER/REPO/issues/ISSUE_NUMBER/comments \
       - name: Create issue using REST API
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.event.issue.user.login }}/${{ github.event.repository.name }}/issues/${{ github.event.issue.number }}/comments \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
           --header "Accept: application/vnd.github.v3+json" \
+          --header "X-GitHub-Api-Version: 2022-11-28" \
           --data '{
             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
             }' \
