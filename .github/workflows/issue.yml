@@ -33,19 +33,30 @@ jobs:
       #       [1]: https://github.com/peter-evans/create-or-update-comment
       #     reactions: '+1'
 
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
-        id: couc
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
+      # - name: Create comment
+      #   uses: peter-evans/create-or-update-comment@v3
+      #   id: couc
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     issue-number: ${{ github.event.issue.number }}
+      #     body: |
+      #       This is a multi-line test comment
+      #       - With GitHub **Markdown** :sparkles:
+      #       - Created by [create-or-update-comment][1]
 
-            [1]: https://github.com/peter-evans/create-or-update-comment
-          reactions: '+1'
+      #       [1]: https://github.com/peter-evans/create-or-update-comment
+      #     reactions: '+1'
+
+      - name: Create issue using REST API
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/{OWNER}/{REPO}/issues/{ISSUE_NUMBER}/comments \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            }' \
+          --fail
 
       # - name: Create comment with API
       #   run: |
