@@ -4,12 +4,9 @@ on:
   issues:
     types: [opened]
 
-# env:
-#   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#   COMMENTS_URL: ${{ github.event.issue.comments_url }}
-#   ISSUE_NUMBER: ${{ github.event.issue.number }}
-#   OWNER: ${{ github.event.issue.user.login }}
-#   REPO: ${{ github.event.repository.name }}
+env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      COMMENTS_URL: ${{ github.event.issue.comments_url }}
 
 jobs:
    Comment-with-action:
@@ -24,7 +21,7 @@ jobs:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: $GITHUB_TOKEN
           issue-number: ${{ github.event.issue.number }}
           body: |
             This is a multi-line test comment
@@ -60,9 +57,6 @@ jobs:
       #       }' \
       #     --fail
       - name: Create comment with API
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
-          COMMENTS_URL: ${{ github.event.issue.comments_url }}
         run: |
           curl -X POST \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
