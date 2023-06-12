@@ -7,6 +7,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   COMMENTS_URL: ${{ github.event.issue.comments_url }}
+  NUMBER: ${{ github.event.issue.number }}
 
 jobs:
    Comment-with-action:
@@ -16,7 +17,8 @@ jobs:
       - name: "Dump github context"
         run: |
           echo 'Bearer ${GITHUB_TOKEN}'
-          echo 'COMMENTS_URL ${{ COMMENTS_URL }}'
+          echo 'COMMENTS_URL ${COMMENTS_URL}'
+           echo 'NUMBER ${NUMBER}'
           echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
