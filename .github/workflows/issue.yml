@@ -52,7 +52,7 @@ jobs:
           curl --request POST \
           --url https://api.github.com/repos/${{ github.event.issue.user.login }}/${{ github.event.repository.name }}/issues/${{ github.event.issue.number }}/comments \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
+          --header "Accept: application/vnd.github.v3+json" \
           --data '{
             "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
             }' \
