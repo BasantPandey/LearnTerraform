@@ -37,7 +37,7 @@ jobs:
         uses: peter-evans/create-or-update-comment@v3
         id: couc
         with:
-          token: ${{ secrets.ACTIONS_BOT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             This is a multi-line test comment
